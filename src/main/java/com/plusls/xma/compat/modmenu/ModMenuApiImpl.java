@@ -9,7 +9,7 @@ public class ModMenuApiImpl implements ModMenuCompatApi {
     public ConfigScreenFactoryCompat<?> getConfigScreenFactoryCompat() {
         return (screen) -> {
             GuiConfigs gui = GuiConfigs.getInstance();
-            gui.setParentGui(screen);
+            gui.setParent(screen);
             return gui;
         };
     }

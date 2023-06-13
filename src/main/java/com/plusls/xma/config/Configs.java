@@ -40,7 +40,7 @@ public class Configs {
     public static void init(@NotNull ConfigManager cm) {
         openConfigGui.getKeybind().setCallback((keyAction, iKeybind) -> {
             GuiConfigs screen = GuiConfigs.getInstance();
-            screen.setParentGui(Minecraft.getInstance().screen);
+            screen.setParent(Minecraft.getInstance().screen);
             Minecraft.getInstance().setScreen(screen);
             return true;
         });

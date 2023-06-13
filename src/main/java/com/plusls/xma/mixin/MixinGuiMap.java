@@ -6,6 +6,7 @@ import com.plusls.xma.ModInfo;
 import com.plusls.xma.RenderWaypointUtil;
 import com.plusls.xma.config.Configs;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -79,8 +80,10 @@ public abstract class MixinGuiMap extends ScreenBase implements IRightClickableE
 
     @Inject(method = "render", at = @At(value = "RETURN"), remap = true)
     private void renderHighlightWaypoint(
-            //#if MC > 11502
-            PoseStack matrixStack,
+            //#if MC > 11904
+            GuiGraphics guiGraphics,
+            //#elseif MC > 11502
+            //$$ PoseStack matrixStack,
             //#endif
             int scaledMouseX, int scaledMouseY, float partialTicks, CallbackInfo ci) {
         if (!Configs.worldMapHighlightWaypoint || HighlightWaypointUtil.highlightPos == null) {
@@ -88,6 +91,10 @@ public abstract class MixinGuiMap extends ScreenBase implements IRightClickableE
         }
         //#if MC <= 11502
         //$$ PoseStack matrixStack = new PoseStack();
+        //#endif
+
+        //#if MC > 11904
+        PoseStack matrixStack = guiGraphics.pose();
         //#endif
 
         Minecraft mc = Minecraft.getInstance();

@@ -36,7 +36,7 @@ repositories {
 def apiDependencies = [
         ["curse.maven:xaeros-world-map-317780"                                     , "xaero_world_map", true, false],
         ["curse.maven:xaeros-minimap-263420"                                       , "xaero_minimap"  , true, false],
-        ["com.plusls.oh-my-minecraft-client:ommc-${project.name.replace(".", "_")}", "ommc"           , true, false]
+        ["com.plusls.oh-my-minecraft-client:ommc-${project.name.replace(".", "_")}", "ommc"           , mcVersion < 12000, false]
 ]
 
 dependencies {
@@ -65,6 +65,10 @@ dependencies {
                 transitive(shouldTransitive)
             }
         }
+    }
+
+    if (mcVersion > 11904) {
+        modApi files("libs/oh-my-minecraft-client-1.20-0.5.289+38cda61-beta.jar")
     }
 
     // Misc
